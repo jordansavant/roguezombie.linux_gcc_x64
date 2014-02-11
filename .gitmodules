@@ -1,0 +1,3 @@
+[submodule "main/roguezombie"]
+	path = main/roguezombie
+	url = /home/skeleton/repos/roguezombie.git
