@@ -3,6 +3,7 @@
 
 # the compiler: gcc for C program, define as g++ for C++
 CC = g++
+SHELL=/bin/bash
 
 # compiler flags:
 #  -g    adds debugging information to the executable file
@@ -36,8 +37,13 @@ SRCS = $(wildcard *.cpp) $(wildcard */*.cpp) $(wildcard */*/*.cpp) $(wildcard */
 #
 OBJS = $(SRCS:.cpp=.o)
 
+# define files to copy
+COPYFILES =  $(wildcard */content/*)
+
 # define the executable file
-MAIN = main
+BUILDDIR = release
+CONTENTDIR = $(BUILDDIR)/content
+MAIN = $(BUILDDIR)/main
 
 #
 # The following part of the makefile is generic; it can be used to
@@ -47,13 +53,15 @@ MAIN = main
 
 .PHONY: depend clean
 
-SHELL=/bin/bash
 
 all: $(MAIN)
-	@echo  Simple compiler named \"main\" has been compiled
+	@echo  Application \"$(MAIN)\" has been compiled
+	@rm -rf $(CONTENTDIR)/*
+	@cp -af */content/* $(CONTENTDIR)/
+
 
 run: main
-	./main
+	./release/main
 
 $(MAIN): $(OBJS)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $(MAIN) $(OBJS) $(LFLAGS) $(LIBS)
