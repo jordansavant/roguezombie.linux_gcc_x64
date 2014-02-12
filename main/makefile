@@ -7,7 +7,7 @@ CC = g++
 # compiler flags:
 #  -g    adds debugging information to the executable file
 #  -Wall turns on most, but not all, compiler warnings
-CFLAGS  = -g -Wall
+CFLAGS  = -g -Wall -std=c++0x
 
 # define any directories containing header files other than /usr/include
 INCLUDES = -I../SFML-2.1/include
@@ -24,7 +24,7 @@ LIBS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lsfml-network
 
 # define the C source files
 #SRCS = roguezombie/main.cpp roguezombie/bitengine/Foo.cpp
-SRCS = $(wildcard *.cpp) $(wildcard */*.cpp) $(wildcard */*/*.cpp)
+SRCS = $(wildcard *.cpp) $(wildcard */*.cpp) $(wildcard */*/*.cpp) $(wildcard */*/*/*.cpp)
 
 # define the C object files
 #
@@ -58,7 +58,7 @@ run: main
 $(MAIN): $(OBJS)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $(MAIN) $(OBJS) $(LFLAGS) $(LIBS)
 
-all: $(OBJS) clean
+#all: $(OBJS) clean
 
 # this is a suffix replacement rule for building .o's from .c's
 # it uses automatic variables $<: the name of the prerequisite of
@@ -68,7 +68,7 @@ all: $(OBJS) clean
 	$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
 
 clean:
-	$(RM) *.o */*.o */*/*.o
+	$(RM) *.o */*.o */*/*.o */*/*/*.o
 
 depend: $(SRCS)
 	makedepend $(INCLUDES) $^
