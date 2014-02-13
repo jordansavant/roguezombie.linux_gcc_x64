@@ -8,7 +8,7 @@ SHELL=/bin/bash
 # compiler flags:
 #  -g    adds debugging information to the executable file
 #  -Wall turns on most, but not all, compiler warnings
-CFLAGS  = -g -Wall -std=c++0x
+CFLAGS  = -g -Wall -std=c++0x -lm
 
 # define any directories containing header files other than /usr/include
 INCLUDES = -I../SFML-2.1/include
